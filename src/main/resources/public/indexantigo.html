@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Sistema de Projetos</title>
+      <link rel="icon" type="image/x-icon" href="/assets/img/favicon/favicon.ico" />
+      <link rel="stylesheet" href="/assets/vendor/fonts/iconify-icons.css" />
+      <link rel="stylesheet" href="/assets/vendor/libs/node-waves/node-waves.css" />
+      <link rel="stylesheet" href="/assets/vendor/css/core.css" />
+      <link rel="stylesheet" href="/assets/css/demo.css" />
+      <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    </head>
+<body>
+  <main>
+    <h1>Sistema de Projetos</h1>
+
+    <form id="form-projeto">
+      <label>Nome
+        <input id="nome" required>
+      </label>
+      <label>Descrição
+        <input id="descricao" required>
+      </label>
+      <label>Categoria
+        <select id="categoria">
+          <option>Web</option>
+          <option>Software</option>
+          <option>Mobile</option>
+          <option>Outro</option>
+        </select>
+      </label>
+      <label>Status
+        <select id="status">
+          <option>Planejado</option>
+          <option>Em desenvolvimento</option>
+          <option>Concluído</option>
+        </select>
+      </label>
+      <div class="acoes">
+        <button type="submit">Cadastrar</button>
+        <button type="reset" class="secundario">Limpar</button>
+      </div>
+    </form>
+
+    <p id="mensagem" role="status"></p>
+
+    <div class="tabela">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Status</th>
+            <th><span class="so-leitor">Ações</span></th>
+          </tr>
+        </thead>
+        <tbody id="lista"></tbody>
+      </table>
+    </div>
+    <p id="vazio" hidden>Nenhum projeto cadastrado. Preencha o formulário para criar o primeiro.</p>
+  </main>
+
+  <script src="/assets/vendor/libs/jquery/jquery.js"></script>
+  <script src="/assets/vendor/libs/popper/popper.js"></script>
+  <script src="/assets/vendor/js/bootstrap.js"></script>
+  <script src="/assets/vendor/libs/node-waves/node-waves.js"></script>
+  <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="/assets/vendor/js/menu.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

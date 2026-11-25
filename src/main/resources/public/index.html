@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="layout-menu-fixed layout-compact" data-assets-path="/assets/" data-template="vertical-menu-template">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sistema de Projetos</title>
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon/favicon.ico" />
+    <link rel="stylesheet" href="/assets/vendor/fonts/iconify-icons.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="/assets/vendor/css/core.css" />
+    <link rel="stylesheet" href="/assets/css/demo.css" />
+    <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="/assets/vendor/js/helpers.js"></script>
+    <script src="/assets/js/config.js"></script>
+    <script>
+      if (!sessionStorage.getItem("usuario")) location.replace("login.html");
+      document.documentElement.setAttribute("data-bs-theme", localStorage.getItem("tema") || "light");
+    </script>
+  </head>
+<body>
+
+  <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+
+      <!-- MENU LATERAL -->
+      <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+        <div class="app-brand demo">
+          <a href="/" class="app-brand-link">
+            <span class="app-brand-text demo menu-text fw-bold ms-2">Sistema de Projetos</span>
+          </a>
+          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="icon-base ri ri-close-line"></i>
+          </a>
+        </div>
+
+        <ul class="menu-inner py-1">
+          <li class="menu-item" id="menu-projetos">
+            <a href="#projetos" id="link-projetos" class="menu-link">
+              <i class="menu-icon icon-base ri ri-folder-line"></i>
+              <div>Projetos</div>
+            </a>
+          </li>
+          <li class="menu-item active" id="menu-dashboard">
+            <a href="#dashboard" id="link-dashboard" class="menu-link">
+              <i class="menu-icon icon-base ri ri-home-smile-line"></i>
+              <div>Dashboard</div>
+            </a>
+          </li>
+          <li class="menu-item" id="menu-categorias">
+            <a href="#categorias" id="link-categorias" class="menu-link">
+              <i class="menu-icon icon-base ri ri-price-tag-3-line"></i>
+              <div>Categorias</div>
+            </a>
+          </li>
+          <li class="menu-item" id="menu-informacoes">
+            <a href="#informacoes" id="link-informacoes" class="menu-link">
+              <i class="menu-icon icon-base ri ri-information-line"></i>
+              <div>Informações</div>
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- PÁGINA (navbar + conteúdo) -->
+      <div class="layout-page">
+
+        <nav class="layout-navbar container-xxl navbar-detached navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
+          <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 d-xl-none">
+            <a class="nav-item nav-link px-0" href="javascript:void(0)">
+              <i class="icon-base ri ri-menu-line"></i>
+            </a>
+          </div>
+          <span class="d-xl-none fw-medium">Sistema de Projetos</span>
+
+          <div class="d-flex align-items-center gap-3 ms-auto">
+            <button type="button" id="btn-tema" class="btn btn-sm btn-outline-secondary" title="Alternar modo escuro" aria-label="Alternar modo escuro">
+              <i id="icone-tema" class="icon-base ri ri-moon-line"></i>
+            </button>
+            <span class="fw-medium">Admin</span>
+            <div class="avatar">
+              <span class="avatar-initial rounded-circle bg-label-primary">A</span>
+            </div>
+            <button type="button" id="btn-sair" class="btn btn-sm btn-outline-secondary">Sair</button>
+          </div>
+        </nav>
+
+        <div class="content-wrapper">
+          <div class="container-xxl flex-grow-1 container-p-y">
+
+            <!-- ================= TELA: DASHBOARD ================= -->
+            <div id="secao-dashboard">
+              <div class="row g-4 mb-4">
+                <div class="col-sm-6 col-xl-3">
+                  <div class="card h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                      <div class="avatar avatar-lg">
+                        <span class="avatar-initial rounded bg-label-primary">
+                          <i class="icon-base ri ri-folder-line ri-24px"></i>
+                        </span>
+                      </div>
+                      <div>
+                        <h4 class="mb-0" id="stat-total">0</h4>
+                        <small class="text-body-secondary">Total de Projetos</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+                  <div class="card h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                      <div class="avatar avatar-lg">
+                        <span class="avatar-initial rounded bg-label-success">
+                          <i class="icon-base ri ri-checkbox-circle-line ri-24px"></i>
+                        </span>
+                      </div>
+                      <div>
+                        <h4 class="mb-0" id="stat-concluidos">0</h4>
+                        <small class="text-body-secondary">Concluídos</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+                  <div class="card h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                      <div class="avatar avatar-lg">
+                        <span class="avatar-initial rounded bg-label-info">
+                          <i class="icon-base ri ri-time-line ri-24px"></i>
+                        </span>
+                      </div>
+                      <div>
+                        <h4 class="mb-0" id="stat-andamento">0</h4>
+                        <small class="text-body-secondary">Em Andamento</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+                  <div class="card h-100">
+                    <div class="card-body d-flex align-items-center gap-3">
+                      <div class="avatar avatar-lg">
+                        <span class="avatar-initial rounded bg-label-warning">
+                          <i class="icon-base ri ri-bar-chart-line ri-24px"></i>
+                        </span>
+                      </div>
+                      <div>
+                        <h4 class="mb-0" id="stat-planejados">0</h4>
+                        <small class="text-body-secondary">Planejados</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row g-4">
+                <div class="col-lg-5">
+                  <div class="card h-100">
+                    <h5 class="card-header">Projetos por Categoria</h5>
+                    <div class="card-body d-flex align-items-center justify-content-center">
+                      <p id="grafico-vazio" class="text-body-secondary mb-0" hidden>Nenhum projeto cadastrado.</p>
+                      <div id="box-grafico" style="width: 100%; max-width: 260px;">
+                        <canvas id="grafico-categorias"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-7">
+                  <div class="card h-100">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                      <h5 class="mb-0">Projetos Recentes</h5>
+                      <button type="button" id="btn-ir-projetos" class="btn btn-sm btn-primary">
+                        Gerenciar Projetos
+                      </button>
+                    </div>
+                    <div class="table-responsive text-nowrap">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Nome</th>
+                            <th>Categoria</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody id="lista-recentes"></tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ================= TELA: PROJETOS ================= -->
+            <div id="secao-projetos" hidden>
+              <div class="card mb-4">
+                <h5 class="card-header">Cadastro de Projeto</h5>
+                <div class="card-body">
+                  <form id="form-projeto">
+                    <div class="mb-4">
+                      <label for="nome" class="form-label">Nome do Projeto</label>
+                      <input id="nome" class="form-control" required>
+                    </div>
+                    <div class="mb-4">
+                      <label for="descricao" class="form-label">Descrição</label>
+                      <input id="descricao" class="form-control" required>
+                    </div>
+
+                    <div class="row g-4 mb-4">
+                      <div class="col-md-6">
+                        <label for="categoria" class="form-label">Categoria</label>
+                        <select id="categoria" class="form-select">
+                          <option>Web</option>
+                          <option>Software</option>
+                          <option>Mobile</option>
+                          <option>Outro</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="status" class="form-label">Status</label>
+                        <select id="status" class="form-select">
+                          <option>Planejado</option>
+                          <option>Em desenvolvimento</option>
+                          <option>Concluído</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2">
+                      <button type="submit" class="btn btn-primary">Salvar</button>
+                      <button type="reset" class="btn btn-outline-secondary">Limpar</button>
+                      <button type="button" id="btn-excluir" class="btn btn-outline-danger" disabled>Excluir</button>
+                    </div>
+                  </form>
+
+                  <p id="mensagem" role="status"></p>
+                </div>
+              </div>
+
+              <div class="card">
+                <h5 class="card-header">Lista de Projetos</h5>
+                <div class="card-body pb-4">
+                  <div class="input-group input-group-merge">
+                    <span class="input-group-text"><i class="icon-base ri ri-search-line"></i></span>
+                    <input type="search" id="busca" class="form-control" placeholder="Pesquisar projeto...">
+                  </div>
+                </div>
+
+                <div class="table-responsive text-nowrap">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="lista"></tbody>
+                  </table>
+                </div>
+                <p id="vazio" hidden>Nenhum projeto cadastrado. Preencha o formulário para criar o primeiro.</p>
+              </div>
+            </div>
+
+            <!-- ================= TELA: CATEGORIAS ================= -->
+            <div id="secao-categorias" hidden>
+              <div class="row g-4 mb-4">
+                <div class="col-sm-6 col-xl-3">
+                  <div class="card h-100 card-categoria" data-categoria="Web" style="cursor: pointer;">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                      <div>
+                        <span class="text-body-secondary d-block mb-1">Web</span>
+                        <h4 class="mb-0" id="cat-qtd-Web">0</h4>
+                      </div>
+                      <div class="avatar">
+                        <span class="avatar-initial rounded bg-label-primary">
+                          <i class="icon-base ri ri-global-line ri-22px"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+                  <div class="card h-100 card-categoria" data-categoria="Software" style="cursor: pointer;">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                      <div>
+                        <span class="text-body-secondary d-block mb-1">Software</span>
+                        <h4 class="mb-0" id="cat-qtd-Software">0</h4>
+                      </div>
+                      <div class="avatar">
+                        <span class="avatar-initial rounded bg-label-info">
+                          <i class="icon-base ri ri-code-s-slash-line ri-22px"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+                  <div class="card h-100 card-categoria" data-categoria="Mobile" style="cursor: pointer;">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                      <div>
+                        <span class="text-body-secondary d-block mb-1">Mobile</span>
+                        <h4 class="mb-0" id="cat-qtd-Mobile">0</h4>
+                      </div>
+                      <div class="avatar">
+                        <span class="avatar-initial rounded bg-label-success">
+                          <i class="icon-base ri ri-smartphone-line ri-22px"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6 col-xl-3">
+                  <div class="card h-100 card-categoria" data-categoria="Outro" style="cursor: pointer;">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                      <div>
+                        <span class="text-body-secondary d-block mb-1">Outro</span>
+                        <h4 class="mb-0" id="cat-qtd-Outro">0</h4>
+                      </div>
+                      <div class="avatar">
+                        <span class="avatar-initial rounded bg-label-warning">
+                          <i class="icon-base ri ri-apps-line ri-22px"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-3">
+                  <div class="d-flex flex-wrap align-items-center gap-2" id="filtros-categorias">
+                    <button type="button" class="btn btn-sm btn-primary" data-filtro="Todas">Todas</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-filtro="Web">Web</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-filtro="Software">Software</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-filtro="Mobile">Mobile</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-filtro="Outro">Outro</button>
+                  </div>
+
+                  <button type="button" id="btn-novo-na-categoria" class="btn btn-sm btn-primary">
+                    + Novo Projeto
+                  </button>
+                </div>
+
+                <div class="table-responsive text-nowrap">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="lista-categorias"></tbody>
+                  </table>
+                </div>
+                <p id="vazio-categorias" class="p-4 mb-0 text-body-secondary" hidden>
+                  Nenhum projeto encontrado nesta categoria.
+                </p>
+              </div>
+            </div>
+
+            <!-- ================= TELA: INFORMAÇÕES ================= -->
+            <div id="secao-informacoes" hidden>
+              <div class="row g-4 mb-4">
+
+                <!-- Coluna 1: Frontend Web -->
+                <div class="col-lg-6">
+                  <div class="card h-100">
+                    <div class="card-header d-flex align-items-center gap-2">
+                      <span class="avatar-initial rounded bg-label-primary p-2">
+                        <i class="icon-base ri ri-code-s-slash-line"></i>
+                      </span>
+                      <h5 class="mb-0">Frontend (Interface Web)</h5>
+                    </div>
+                    <div class="card-body">
+                      <ul class="list-unstyled mb-0 d-flex flex-column gap-3">
+                        <li>
+                          <strong>HTML5 &amp; CSS3:</strong> Estrutura das páginas.
+                        </li>
+                        <li>
+                          <strong>Bootstrap 5 &amp; Tema Materio:</strong> Sistema de grid responsivo e componentes de layout.
+                        </li>
+                        <li>
+                          <strong>Chart.js:</strong> Geração do gráfico em pizza.
+                        </li>
+                        <li>
+                          <strong>JavaScript</strong>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Coluna 2: Backend & Desktop -->
+                <div class="col-lg-6">
+                  <div class="card h-100">
+                    <div class="card-header d-flex align-items-center gap-2">
+                      <span class="avatar-initial rounded bg-label-info p-2">
+                        <i class="icon-base ri ri-server-line"></i>
+                      </span>
+                      <h5 class="mb-0">Backend &amp; Aplicação Desktop</h5>
+                    </div>
+                    <div class="card-body">
+                      <ul class="list-unstyled mb-0 d-flex flex-column gap-3">
+                        <li>
+                          <strong>Java &amp; Javalin:</strong> Servidor web.
+                        </li>
+                        <li>
+                          <strong>Jackson:</strong> JSON.
+                        </li>
+                        <li>
+                          <strong>Java Swing:</strong> Interface gráfica desktop integrada à mesma base de dados e sincronizada com a versão web.
+                        </li>
+                        <li>
+                          <strong>FlatLaf &amp; MigLayout:</strong> Aparência moderna.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Card inferior: Endpoints da API -->
+              <div class="card">
+                <div class="card-header d-flex align-items-center gap-2">
+                  <span class="avatar-initial rounded bg-label-success p-2">
+                    <i class="icon-base ri ri-exchange-line"></i>
+                  </span>
+                  <h5 class="mb-0">Endpoints da API Utilizados</h5>
+                </div>
+                <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Método</th>
+                        <th>Rota</th>
+                        <th>Função</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span class="badge bg-label-primary">POST</span></td>
+                        <td><code>/api/login</code></td>
+                        <td>Autentica o usuário e inicia a sessão no navegador</td>
+                      </tr>
+                      <tr>
+                        <td><span class="badge bg-label-success">GET</span></td>
+                        <td><code>/api/projetos</code></td>
+                        <td>Retorna a lista completa de projetos cadastrados</td>
+                      </tr>
+                      <tr>
+                        <td><span class="badge bg-label-primary">POST</span></td>
+                        <td><code>/api/projetos</code></td>
+                        <td>Cadastra um novo projeto no sistema</td>
+                      </tr>
+                      <tr>
+                        <td><span class="badge bg-label-danger">DELETE</span></td>
+                        <td><code>/api/projetos/{id}</code></td>
+                        <td>Remove o projeto selecionado pelo ID</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="content-backdrop fade"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layout-overlay layout-menu-toggle"></div>
+  </div>
+
+  <script src="/assets/vendor/libs/jquery/jquery.js"></script>
+  <script src="/assets/vendor/libs/popper/popper.js"></script>
+  <script src="/assets/vendor/js/bootstrap.js"></script>
+  <script src="/assets/vendor/libs/node-waves/node-waves.js"></script>
+  <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="/assets/vendor/js/menu.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/vendor/libs/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

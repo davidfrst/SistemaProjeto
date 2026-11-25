@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-assets-path="/assets/" data-template="vertical-menu-template">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Entrar | Sistema de Projetos</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="/assets/vendor/fonts/iconify-icons.css" />
+    <link rel="stylesheet" href="/assets/vendor/css/core.css" />
+    <link rel="stylesheet" href="/assets/css/demo.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+<body>
+
+  <div class="min-vh-100 d-flex align-items-center justify-content-center p-4">
+    <div class="card w-100" style="max-width: 420px;">
+      <div class="card-body p-5">
+        <h4 class="mb-1">Sistema de Projetos</h4>
+        <p class="text-body-secondary mb-5">Entre com seu usuário e senha.</p>
+
+        <form id="form-login">
+          <div class="mb-4">
+            <label for="usuario" class="form-label">Usuário</label>
+            <input id="usuario" class="form-control" autocomplete="username" autofocus required>
+          </div>
+          <div class="mb-4">
+            <label for="senha" class="form-label">Senha</label>
+            <input id="senha" type="password" class="form-control" autocomplete="current-password" required>
+          </div>
+          <button type="submit" id="btn-entrar" class="btn btn-primary w-100">Entrar</button>
+        </form>
+
+        <p id="mensagem" role="status"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
